@@ -3,7 +3,6 @@ package com.main.app_cotacao_v2.service.aluno;
 import com.main.app_cotacao_v2.model.aluno.Aluno;
 import com.main.app_cotacao_v2.model.aluno.AlunoDto;
 import com.main.app_cotacao_v2.model.escola.Escola;
-import com.main.app_cotacao_v2.model.escola.EscolaDto;
 import com.main.app_cotacao_v2.repository.alunoRepository.AlunoRepository;
 import com.main.app_cotacao_v2.repository.escolaRepository.EscolaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

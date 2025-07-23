@@ -2,7 +2,6 @@ package com.main.app_cotacao_v2.controller.aluno;
 
 import com.main.app_cotacao_v2.model.aluno.Aluno;
 import com.main.app_cotacao_v2.model.aluno.AlunoDto;
-import com.main.app_cotacao_v2.model.escola.EscolaDto;
 import com.main.app_cotacao_v2.service.aluno.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -28,5 +28,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             @Param("p_aluno_escola_id") Integer alunoEscolaId,
             @Param("p_role") String role
     );
+    @Procedure(procedureName = "sp_cadastrar_cliente_com_usuario")
+    void cadastrarClienteComUsuario(
+            @Param("p_nome") String nome,
+            @Param("p_email") String email,
+            @Param("p_senha") String senha,
+            @Param("p_aluno_id") Long alunoId
+    );
 
 }

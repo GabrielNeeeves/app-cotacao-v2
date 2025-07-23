@@ -1,6 +1,5 @@
 package com.main.app_cotacao_v2.service.escola;
 
-import com.main.app_cotacao_v2.model.aluno.Aluno;
 import com.main.app_cotacao_v2.model.escola.Escola;
 import com.main.app_cotacao_v2.model.escola.EscolaDto;
 import com.main.app_cotacao_v2.repository.escolaRepository.EscolaRepository;
@@ -8,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
