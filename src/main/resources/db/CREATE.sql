@@ -6,6 +6,7 @@ CREATE TABLE Usuario (
     senha VARCHAR(100) NOT NULL,
     role  VARCHAR(100) NOT NULL
 );
+SELECT * FROM usuario;
 
 -- Tabela Administrador
 CREATE TABLE Administrador (
