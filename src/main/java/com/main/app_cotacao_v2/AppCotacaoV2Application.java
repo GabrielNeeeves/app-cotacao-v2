@@ -9,5 +9,4 @@ public class AppCotacaoV2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(AppCotacaoV2Application.class, args);
 	}
-
 }

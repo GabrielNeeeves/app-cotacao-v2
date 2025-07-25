@@ -44,7 +44,7 @@ public class AlunoController {
             return new ResponseEntity<>("Aluno deletado com sucesso", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao deletar aluno: " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                    HttpStatus.NOT_FOUND);
         }
     }
 
@@ -56,7 +56,7 @@ public class AlunoController {
             return new ResponseEntity<>("Aluno atualizado com sucesso", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao atualizar aluno: " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                    HttpStatus.NOT_FOUND);
         }
     }
 

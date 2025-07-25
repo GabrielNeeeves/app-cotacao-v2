@@ -109,6 +109,40 @@ FROM MaterialPersonalizado mp
 JOIN ListaPersonalizada lp ON mp.id_lista_personalizada = lp.id;
 
 
+--View: Dados do cliente
+CREATE OR REPLACE VIEW vw_cliente AS
+SELECT
+    c.id AS cliente_id,
+    c.aluno_id,
+    u.id AS usuario_id,
+    u.nome,
+    u.email,
+    u.senha,
+    u.role
+FROM
+    Cliente c
+JOIN
+    Usuario u ON c.usuario_id = u.id;
+
+
+--View: Dados do Funcionario
+CREATE OR REPLACE VIEW vw_funcionario AS
+SELECT
+    f.id AS funcionario_id,
+    f.salario,
+    f.empresa_id,
+    f.escola_id,
+    u.id AS usuario_id,
+    u.nome AS usuario_nome,
+    u.email AS usuario_email,
+    u.senha AS usuario_senha,
+    u.role AS usuario_role
+FROM
+    Funcionario f
+INNER JOIN
+    Usuario u ON f.usuario_id = u.id;
+
+
 
 
 

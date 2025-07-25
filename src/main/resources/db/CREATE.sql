@@ -4,7 +4,7 @@ CREATE TABLE Usuario (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(100) NOT NULL,
-    role  VARCHAR(100) NOT NULL
+    role  VARCHAR(100) NOT NULL --CLIENTE, ADMINISTRADOR, FUNCIONARIO
 );
 SELECT * FROM usuario;
 
@@ -69,7 +69,7 @@ CREATE TABLE Aluno (
 	turno varchar(20),
 	check(turno IN ('MATUTINO', 'VESPERTINO', 'NOTURNO')),
 	ano_letivo int NOT NULL,
-	observacoes VARCHAR(200) NULL,
+	observacoes VARCHAR(200) NULL, 
 	FOREIGN KEY(escola_id) REFERENCES Escola(id)
 );
 

@@ -2,6 +2,7 @@ package com.main.app_cotacao_v2.model.usuariosModel;
 
 import com.main.app_cotacao_v2.model.empresa.Empresa;
 import com.main.app_cotacao_v2.model.escola.Escola;
+import com.main.app_cotacao_v2.model.usuariosModel.dto.FuncionarioDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,5 +36,41 @@ public class Funcionario {
     private Escola escola;
 
     // A regra CHECK para exclusividade empresa_id X escola_id deve ser garantida na camada DB ou service
+
+    public Long getId() {
+        return id;
+    }
+
+    public BigDecimal getSalario() {
+        return salario;
+    }
+
+    public void setSalario(BigDecimal salario) {
+        this.salario = salario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Escola getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Escola escola) {
+        this.escola = escola;
+    }
 }
 

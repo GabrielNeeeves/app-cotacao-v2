@@ -13,17 +13,31 @@ BEGIN
 END;
 $$;
 
--- Cadastrar Administrador
+
+
+-- Cadastrar Administrador em Usuario também
 CREATE OR REPLACE PROCEDURE sp_cadastrar_administrador(
-    p_usuario_id INT
+	p_nome VARCHAR,
+	p_email VARCHAR,
+	p_senha VARCHAR
 )
 LANGUAGE plpgsql
 AS $$
+DECLARE
+	v_usuario_id BIGINT;
 BEGIN
-    INSERT INTO Administrador (usuario_id)
-    VALUES (p_usuario_id);
+    -- Inserir na tabela Usuario
+	    INSERT INTO Usuario (nome, email, senha, role)
+	    VALUES (p_nome, p_email, p_senha, 'ADMINISTRADOR')
+	    RETURNING id INTO v_usuario_id;
+    -- Inserir na tabela Administrador
+	    INSERT INTO Administrador (usuario_id)
+	    VALUES (v_usuario_id);
 END;
 $$;
+
+
+
 
 -- Cadastrar Empresa
 CREATE OR REPLACE PROCEDURE sp_cadastrar_empresa(
@@ -57,22 +71,32 @@ $$;
 
 -- Cadastrar Funcionario
 CREATE OR REPLACE PROCEDURE sp_cadastrar_funcionario(
+    p_nome VARCHAR,
+    p_email VARCHAR,
+    p_senha VARCHAR,
     p_salario DECIMAL,
-    p_usuario_id INT,
     p_empresa_id INT DEFAULT NULL,
     p_escola_id INT DEFAULT NULL
 )
 LANGUAGE plpgsql
 AS $$
+DECLARE
+    v_usuario_id INT;
 BEGIN
+    -- Inserir na tabela Usuario
+    INSERT INTO Usuario (nome, email, senha, role)
+    VALUES (p_nome, p_email, p_senha, 'FUNCIONARIO')
+    RETURNING id INTO v_usuario_id;
+
+    -- Inserir na tabela Funcionario
     INSERT INTO Funcionario (salario, usuario_id, empresa_id, escola_id)
-    VALUES (p_salario, p_usuario_id, p_empresa_id, p_escola_id);
+    VALUES (p_salario, v_usuario_id, p_empresa_id, p_escola_id);
 END;
 $$;
 
 -- Cadastrar Aluno
 CREATE OR REPLACE PROCEDURE sp_cadastrar_aluno(
-    p_escola_id INT,
+    p_escola_id BIGINT,
     p_nome VARCHAR,
     p_serie VARCHAR,
     p_turno VARCHAR,
@@ -87,18 +111,69 @@ BEGIN
 END;
 $$;
 
--- Cadastrar Cliente
-CREATE OR REPLACE PROCEDURE sp_cadastrar_cliente(
-    p_aluno_id INT,
-    p_usuario_id INT
+
+-- Cadastrar Cliente com aluno e usuário ao "mesmo tempo"
+CREATE OR REPLACE PROCEDURE sp_cadastrar_cliente_usuario_aluno(
+    p_nome VARCHAR,
+    p_email VARCHAR,
+    p_senha VARCHAR,
+    p_aluno_nome VARCHAR,
+    p_aluno_serie VARCHAR,
+    p_aluno_turno VARCHAR,
+    p_aluno_ano_letivo INT,
+    p_aluno_observacoes VARCHAR DEFAULT NULL,
+    p_aluno_escola_id INT DEFAULT NULL,
+    p_role VARCHAR DEFAULT 'CLIENTE'
 )
 LANGUAGE plpgsql
 AS $$
+DECLARE
+    v_usuario_id INT;
+    v_aluno_id INT;
 BEGIN
-    INSERT INTO Cliente (aluno_id, usuario_id)
-    VALUES (p_aluno_id, p_usuario_id);
+    -- Inserir na tabela Usuario
+    INSERT INTO Usuario (nome, email, senha, role)
+    VALUES (p_nome, p_email, p_senha, p_role)
+    RETURNING id INTO v_usuario_id;
+
+    -- Inserir na tabela Aluno
+    INSERT INTO Aluno (nome, serie, turno, ano_letivo, observacoes, escola_id)
+    VALUES (p_aluno_nome, p_aluno_serie, p_aluno_turno, p_aluno_ano_letivo, p_aluno_observacoes, p_aluno_escola_id)
+    RETURNING id INTO v_aluno_id;
+
+    -- Inserir na tabela Cliente
+    INSERT INTO Cliente (usuario_id, aluno_id)
+    VALUES (v_usuario_id, v_aluno_id);
 END;
 $$;
+
+
+
+-- Cadastrar Cliente em Usuário
+CREATE OR REPLACE PROCEDURE sp_cadastrar_cliente_com_usuario(
+    p_nome VARCHAR,
+    p_email VARCHAR,
+    p_senha VARCHAR,
+    p_aluno_id BIGINT
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_usuario_id BIGINT;
+BEGIN
+    -- Inserir na tabela Usuario
+    INSERT INTO Usuario (nome, email, senha, role)
+    VALUES (p_nome, p_email, p_senha, 'CLIENTE')
+    RETURNING id INTO v_usuario_id;
+
+    -- Inserir na tabela Cliente
+    INSERT INTO Cliente (usuario_id, aluno_id)
+    VALUES (v_usuario_id, p_aluno_id);
+END;
+$$;
+
+
+
 
 -- Cadastrar ListaPadrao
 CREATE OR REPLACE PROCEDURE sp_cadastrar_lista_padrao(
