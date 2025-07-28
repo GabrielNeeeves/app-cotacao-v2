@@ -76,7 +76,7 @@ CREATE TABLE Aluno (
 
 
 -- Lista padrão criada pelo funcionário
-CREATE TABLE ListaPadrao (
+CREATE TABLE  lista_padrao (
     id SERIAL PRIMARY KEY,
     funcionario_id INT NOT NULL,
     escola_id INT NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE MaterialPadrao (
     observacoes VARCHAR(200),
     FOREIGN KEY (lista_padrao_id) REFERENCES ListaPadrao(id) ON DELETE CASCADE
 );
-
+ALTER TABLE MaterialPadrao RENAME TO material_padrao;
 
 -- Lista personalizada criada pelo cliente para um aluno específico
 CREATE TABLE ListaPersonalizada (
@@ -107,6 +107,7 @@ CREATE TABLE ListaPersonalizada (
     FOREIGN KEY (aluno_id) REFERENCES Aluno(id) ON DELETE CASCADE,
     FOREIGN KEY (lista_padrao_id) REFERENCES ListaPadrao(id) ON DELETE CASCADE
 );
+ALTER TABLE ListaPersonalizada RENAME TO lista_personalizada;
 
 -- Itens escolhidos pelo cliente
 CREATE TABLE MaterialPersonalizado (
@@ -118,6 +119,7 @@ CREATE TABLE MaterialPersonalizado (
     observacoes TEXT,
     FOREIGN KEY (id_lista_personalizada) REFERENCES ListaPersonalizada(id) ON DELETE CASCADE
 );
+ALTER TABLE MaterialPersonalizado RENAME TO material_personalizado;
 
 -- Oferta feita por um funcionário de empresa para esse item
 CREATE TABLE OfertaMaterial (
@@ -131,5 +133,6 @@ CREATE TABLE OfertaMaterial (
     FOREIGN KEY (item_padrao_id) REFERENCES MaterialPadrao(id) ON DELETE CASCADE,
     FOREIGN KEY (funcionario_id) REFERENCES Funcionario(id) ON DELETE CASCADE
 );
+ALTER TABLE OfertaMaterial RENAME TO oferta_material;
 
 

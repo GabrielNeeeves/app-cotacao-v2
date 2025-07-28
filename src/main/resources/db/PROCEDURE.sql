@@ -177,15 +177,15 @@ $$;
 
 -- Cadastrar ListaPadrao
 CREATE OR REPLACE PROCEDURE sp_cadastrar_lista_padrao(
-    p_funcionario_id INT,
-    p_escola_id INT,
+    p_funcionario_id BIGINT,
+    p_escola_id BIGINT,
     p_ano_letivo INT,
     p_serie VARCHAR
 )
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO ListaPadrao (funcionario_id, escola_id, ano_letivo, serie)
+    INSERT INTO lista_padrao (funcionario_id, escola_id, ano_letivo, serie)
     VALUES (p_funcionario_id, p_escola_id, p_ano_letivo, p_serie);
 END;
 $$;
@@ -200,7 +200,7 @@ CREATE OR REPLACE PROCEDURE sp_cadastrar_material_padrao(
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO MaterialPadrao (lista_padrao_id, nome, quantidade, observacoes)
+    INSERT INTO material_padrao (lista_padrao_id, nome, quantidade, observacoes)
     VALUES (p_lista_padrao_id, p_nome, p_quantidade, p_observacoes);
 END;
 $$;
@@ -214,7 +214,7 @@ CREATE OR REPLACE PROCEDURE sp_cadastrar_lista_personalizada(
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO ListaPersonalizada (cliente_id, aluno_id, lista_padrao_id)
+    INSERT INTO lista_personalizada (cliente_id, aluno_id, lista_padrao_id)
     VALUES (p_cliente_id, p_aluno_id, p_lista_padrao_id);
 END;
 $$;
@@ -230,7 +230,7 @@ CREATE OR REPLACE PROCEDURE sp_cadastrar_material_personalizado(
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO MaterialPersonalizado (id_lista_personalizada, nome_material, quantidade, marca_escolhida, observacoes)
+    INSERT INTO material_personalizado (id_lista_personalizada, nome_material, quantidade, marca_escolhida, observacoes)
     VALUES (p_id_lista_personalizada, p_nome_material, p_quantidade, p_marca_escolhida, p_observacoes);
 END;
 $$;
@@ -247,7 +247,7 @@ CREATE OR REPLACE PROCEDURE sp_cadastrar_oferta_material(
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO OfertaMaterial (item_padrao_id, funcionario_id, preco, prazo_entrega, quantidade_minima, observacoes)
+    INSERT INTO oferta_material (item_padrao_id, funcionario_id, preco, prazo_entrega, quantidade_minima, observacoes)
     VALUES (p_item_padrao_id, p_funcionario_id, p_preco, p_prazo_entrega, p_quantidade_minima, p_observacoes);
 END;
 $$;

@@ -21,13 +21,13 @@ public class MaterialPersonalizado {
     private ListaPersonalizada listaPersonalizada;
 
     @Column(nullable = false, length = 200)
-    private String nomeMaterial;
+    private String nome_material;
 
     @Column(nullable = false)
     private Integer quantidade;
 
     @Column(length = 100)
-    private String marcaEscolhida;
+    private String marca_escolhida;
 
     @Column(columnDefinition = "TEXT")
     private String observacoes;

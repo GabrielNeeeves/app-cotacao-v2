@@ -40,7 +40,7 @@ SELECT
     esc.nome AS escola_nome,
     lp.ano_letivo,
     lp.serie
-FROM ListaPadrao lp
+FROM lista_padrao lp
 JOIN Funcionario f ON lp.funcionario_id = f.id
 JOIN Usuario u ON f.usuario_id = u.id
 JOIN Escola esc ON lp.escola_id = esc.id;
@@ -55,8 +55,8 @@ SELECT
     mp.nome AS material_nome,
     mp.quantidade,
     mp.observacoes
-FROM MaterialPadrao mp
-JOIN ListaPadrao lp ON mp.lista_padrao_id = lp.id;
+FROM material_padrao mp
+JOIN lista_padrao lp ON mp.lista_padrao_id = lp.id;
 
 -- View: Ofertas para itens da lista padrão com dados do funcionário e empresa/escola
 CREATE OR REPLACE VIEW vw_ofertas_material AS
@@ -72,8 +72,8 @@ SELECT
     u.nome AS funcionario_nome,
     emp.nome AS empresa_nome,
     esc.nome AS escola_nome
-FROM OfertaMaterial om
-JOIN MaterialPadrao mp ON om.item_padrao_id = mp.id
+FROM oferta_material om
+JOIN material_padrao mp ON om.item_padrao_id = mp.id
 JOIN Funcionario f ON om.funcionario_id = f.id
 JOIN Usuario u ON f.usuario_id = u.id
 LEFT JOIN Empresa emp ON f.empresa_id = emp.id
@@ -90,11 +90,11 @@ SELECT
     lpb.id AS lista_padrao_id,
     lpb.ano_letivo,
     lpb.serie
-FROM ListaPersonalizada lp
+FROM lista_personalizada lp
 JOIN Cliente c ON lp.cliente_id = c.id
 JOIN Usuario u ON c.usuario_id = u.id
 JOIN Aluno a ON lp.aluno_id = a.id
-JOIN ListaPadrao lpb ON lp.lista_padrao_id = lpb.id;
+JOIN lista_padrao lpb ON lp.lista_padrao_id = lpb.id;
 
 -- View: Itens personalizados com suas listas personalizadas
 CREATE OR REPLACE VIEW vw_itens_personalizados AS
@@ -105,8 +105,8 @@ SELECT
     mp.quantidade,
     mp.marca_escolhida,
     mp.observacoes
-FROM MaterialPersonalizado mp
-JOIN ListaPersonalizada lp ON mp.id_lista_personalizada = lp.id;
+FROM material_personalizado mp
+JOIN lista_personalizada lp ON mp.id_lista_personalizada = lp.id;
 
 
 --View: Dados do cliente

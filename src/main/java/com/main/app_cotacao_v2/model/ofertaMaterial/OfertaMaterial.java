@@ -21,20 +21,20 @@ public class OfertaMaterial {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "item_padrao_id")
-    private MaterialPadrao itemPadrao;
+    private MaterialPadrao item_padrao_id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "funcionario_id")
-    private Funcionario funcionario;
+    private Funcionario funcionario_id;
 
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
 
     @Column
-    private Integer prazoEntrega; // dias
+    private Integer prazo_entrega; // dias
 
     @Column
-    private Integer quantidadeMinima;
+    private Integer quantidade_minima;
 
     @Column(columnDefinition = "TEXT")
     private String observacoes;
