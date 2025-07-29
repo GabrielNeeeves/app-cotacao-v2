@@ -87,7 +87,7 @@ CREATE TABLE  lista_padrao (
 );
 
 -- Itens sugeridos na lista padrão
-CREATE TABLE MaterialPadrao (
+CREATE TABLE material_padrao (
     id SERIAL PRIMARY KEY,
     lista_padrao_id INT NOT NULL,
     nome VARCHAR(200) NOT NULL,
@@ -95,10 +95,12 @@ CREATE TABLE MaterialPadrao (
     observacoes VARCHAR(200),
     FOREIGN KEY (lista_padrao_id) REFERENCES ListaPadrao(id) ON DELETE CASCADE
 );
-ALTER TABLE MaterialPadrao RENAME TO material_padrao;
+ALTER TABLE lista_padrao
+ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
+
 
 -- Lista personalizada criada pelo cliente para um aluno específico
-CREATE TABLE ListaPersonalizada (
+CREATE TABLE lista_personalizada (
     id SERIAL PRIMARY KEY,
     cliente_id INT NOT NULL,
     aluno_id INT NOT NULL,
@@ -107,10 +109,11 @@ CREATE TABLE ListaPersonalizada (
     FOREIGN KEY (aluno_id) REFERENCES Aluno(id) ON DELETE CASCADE,
     FOREIGN KEY (lista_padrao_id) REFERENCES ListaPadrao(id) ON DELETE CASCADE
 );
-ALTER TABLE ListaPersonalizada RENAME TO lista_personalizada;
+ALTER TABLE lista_personalizada
+ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
 
 -- Itens escolhidos pelo cliente
-CREATE TABLE MaterialPersonalizado (
+CREATE TABLE material_personalizado (
     id SERIAL PRIMARY KEY,
     id_lista_personalizada INT NOT NULL,
     nome_material VARCHAR(200) NOT NULL,
@@ -119,10 +122,9 @@ CREATE TABLE MaterialPersonalizado (
     observacoes TEXT,
     FOREIGN KEY (id_lista_personalizada) REFERENCES ListaPersonalizada(id) ON DELETE CASCADE
 );
-ALTER TABLE MaterialPersonalizado RENAME TO material_personalizado;
 
 -- Oferta feita por um funcionário de empresa para esse item
-CREATE TABLE OfertaMaterial (
+CREATE TABLE oferta_material (
     id SERIAL PRIMARY KEY,
     item_padrao_id INT NOT NULL,
     funcionario_id INT NOT NULL, -- funcionário que fez a oferta
@@ -133,6 +135,5 @@ CREATE TABLE OfertaMaterial (
     FOREIGN KEY (item_padrao_id) REFERENCES MaterialPadrao(id) ON DELETE CASCADE,
     FOREIGN KEY (funcionario_id) REFERENCES Funcionario(id) ON DELETE CASCADE
 );
-ALTER TABLE OfertaMaterial RENAME TO oferta_material;
 
 
