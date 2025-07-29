@@ -1,6 +1,6 @@
 package com.main.app_cotacao_v2.model.ofertaMaterial;
 
-import com.main.app_cotacao_v2.model.materialPadrao.MaterialPadrao;
+import com.main.app_cotacao_v2.model.listaPadrao.ListaPadrao;
 import com.main.app_cotacao_v2.model.usuariosModel.Funcionario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,28 +15,91 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "oferta_material")
 public class OfertaMaterial {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "item_padrao_id")
-    private MaterialPadrao item_padrao_id;
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "funcionario_id")
-    private Funcionario funcionario_id;
+    @JoinColumn(name = "lista_padrao_id")
+    private ListaPadrao listaPadrao;
 
-    @Column(precision = 10, scale = 2, nullable = false)
+    @Column(nullable = false, length = 200)
+    private String nomeItem; // Nome do item do JSON ao qual a oferta se refere
+
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
-    @Column
-    private Integer prazo_entrega; // dias
+    private Integer prazoEntrega; // em dias
 
-    @Column
-    private Integer quantidade_minima;
+    @Column(nullable = false)
+    private Integer quantidadeMinima = 1;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "text")
     private String observacoes;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public ListaPadrao getListaPadrao() {
+        return listaPadrao;
+    }
+
+    public void setListaPadrao(ListaPadrao listaPadrao) {
+        this.listaPadrao = listaPadrao;
+    }
+
+    public String getNomeItem() {
+        return nomeItem;
+    }
+
+    public void setNomeItem(String nomeItem) {
+        this.nomeItem = nomeItem;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public Integer getPrazoEntrega() {
+        return prazoEntrega;
+    }
+
+    public void setPrazoEntrega(Integer prazoEntrega) {
+        this.prazoEntrega = prazoEntrega;
+    }
+
+    public Integer getQuantidadeMinima() {
+        return quantidadeMinima;
+    }
+
+    public void setQuantidadeMinima(Integer quantidadeMinima) {
+        this.quantidadeMinima = quantidadeMinima;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
 }
 

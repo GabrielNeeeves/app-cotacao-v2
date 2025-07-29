@@ -59,25 +59,17 @@ FROM material_padrao mp
 JOIN lista_padrao lp ON mp.lista_padrao_id = lp.id;
 
 -- View: Ofertas para itens da lista padrão com dados do funcionário e empresa/escola
-CREATE OR REPLACE VIEW vw_ofertas_material AS
-SELECT
-    om.id AS oferta_id,
+CREATE VIEW vw_ofertas_material AS
+SELECT 
+    om.id,
+    om.lista_padrao_id,
+    om.material_nome,
+    om.funcionario_id,
     om.preco,
     om.prazo_entrega,
     om.quantidade_minima,
-    om.observacoes AS oferta_observacoes,
-    mp.id AS material_padrao_id,
-    mp.nome AS material_nome,
-    f.id AS funcionario_id,
-    u.nome AS funcionario_nome,
-    emp.nome AS empresa_nome,
-    esc.nome AS escola_nome
-FROM oferta_material om
-JOIN material_padrao mp ON om.item_padrao_id = mp.id
-JOIN Funcionario f ON om.funcionario_id = f.id
-JOIN Usuario u ON f.usuario_id = u.id
-LEFT JOIN Empresa emp ON f.empresa_id = emp.id
-LEFT JOIN Escola esc ON f.escola_id = esc.id;
+    om.observacoes
+FROM oferta_material om;
 
 -- View: Listas personalizadas com cliente, aluno e lista padrão base
 CREATE OR REPLACE VIEW vw_listas_personalizadas AS

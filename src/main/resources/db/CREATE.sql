@@ -85,6 +85,8 @@ CREATE TABLE  lista_padrao (
     FOREIGN KEY (funcionario_id) REFERENCES Funcionario(id) ON DELETE CASCADE,
     FOREIGN KEY (escola_id) REFERENCES Escola(id) ON DELETE CASCADE
 );
+ALTER TABLE lista_padrao
+ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
 
 -- Itens sugeridos na lista padrão
 CREATE TABLE material_padrao (
@@ -95,8 +97,6 @@ CREATE TABLE material_padrao (
     observacoes VARCHAR(200),
     FOREIGN KEY (lista_padrao_id) REFERENCES ListaPadrao(id) ON DELETE CASCADE
 );
-ALTER TABLE lista_padrao
-ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
 
 
 -- Lista personalizada criada pelo cliente para um aluno específico
@@ -112,22 +112,28 @@ CREATE TABLE lista_personalizada (
 ALTER TABLE lista_personalizada
 ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
 
+
+
+
 -- Itens escolhidos pelo cliente
-CREATE TABLE material_personalizado (
-    id SERIAL PRIMARY KEY,
-    id_lista_personalizada INT NOT NULL,
-    nome_material VARCHAR(200) NOT NULL,
-    quantidade INT NOT NULL,
-    marca_escolhida VARCHAR(100),
-    observacoes TEXT,
-    FOREIGN KEY (id_lista_personalizada) REFERENCES ListaPersonalizada(id) ON DELETE CASCADE
-);
+--CREATE TABLE material_personalizado (
+--    id SERIAL PRIMARY KEY,
+--    id_lista_personalizada INT NOT NULL,
+--    nome_material VARCHAR(200) NOT NULL,
+--    quantidade INT NOT NULL,
+--    marca_escolhida VARCHAR(100),
+--    observacoes TEXT,
+--    FOREIGN KEY (id_lista_personalizada) REFERENCES ListaPersonalizada(id) ON DELETE CASCADE
+--); DROP TABLE material_personalizado cascade
+
+
+
 
 -- Oferta feita por um funcionário de empresa para esse item
 CREATE TABLE oferta_material (
     id SERIAL PRIMARY KEY,
     item_padrao_id INT NOT NULL,
-    funcionario_id INT NOT NULL, -- funcionário que fez a oferta
+    funcionario_id INT NOT NULL,
     preco DECIMAL(10,2) NOT NULL,
     prazo_entrega INT, -- em dias
     quantidade_minima INT DEFAULT 1,
@@ -135,5 +141,12 @@ CREATE TABLE oferta_material (
     FOREIGN KEY (item_padrao_id) REFERENCES MaterialPadrao(id) ON DELETE CASCADE,
     FOREIGN KEY (funcionario_id) REFERENCES Funcionario(id) ON DELETE CASCADE
 );
+ALTER TABLE oferta_material
+    DROP COLUMN item_padrao_id,
+    ADD COLUMN lista_padrao_id INT NOT NULL,
+    ADD COLUMN material_nome VARCHAR(200) NOT NULL,
+    ADD CONSTRAINT oferta_material_lista_padrao_id_fkey
+        FOREIGN KEY (lista_padrao_id) REFERENCES lista_padrao(id) ON DELETE CASCADE;
 
+DROP VIEW IF EXISTS vw_ofertas_material;
 

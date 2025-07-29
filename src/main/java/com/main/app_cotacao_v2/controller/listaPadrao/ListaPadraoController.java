@@ -1,5 +1,6 @@
 package com.main.app_cotacao_v2.controller.listaPadrao;
 
+import com.main.app_cotacao_v2.model.listaPadrao.ListaPadrao;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoDto;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoView;
 import com.main.app_cotacao_v2.service.listaPadrao.ListaPadraoService;
@@ -36,8 +37,8 @@ public class ListaPadraoController {
 
     //POST
     @PostMapping
-    public ResponseEntity<String> postListaPadrao(@RequestBody ListaPadraoDto dto) {
-        return listaPadraoService.postListaPadrao(dto);
+    public void postListaPadrao(@RequestBody ListaPadraoDto dto) {
+        listaPadraoService.postListaPadrao(dto);
     }
 
     //DELETE

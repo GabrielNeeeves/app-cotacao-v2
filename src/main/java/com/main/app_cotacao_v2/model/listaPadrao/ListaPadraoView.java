@@ -34,4 +34,7 @@ public class ListaPadraoView {
 
     @Column(name = "serie")
     private String serie;
+
+    @Column(name = "materiais")
+    private String materiais;
 }

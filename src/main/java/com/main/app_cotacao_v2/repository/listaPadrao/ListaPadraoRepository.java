@@ -1,9 +1,12 @@
 package com.main.app_cotacao_v2.repository.listaPadrao;
 
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadrao;
+import com.main.app_cotacao_v2.model.listaPadrao.MaterialDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface ListaPadraoRepository extends JpaRepository<ListaPadrao, Long> {
 
@@ -12,6 +15,7 @@ public interface ListaPadraoRepository extends JpaRepository<ListaPadrao, Long> 
             @Param("p_funcionario_id") Long funcionario_id,
             @Param("p_escola_id") Long escola_id,
             @Param("p_ano_letivo") Integer ano_letivo,
-            @Param("p_serie") String serie
-    );
+            @Param("p_serie") String serie,
+            @Param("p_materiais") String materiais
+            );
 }

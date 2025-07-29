@@ -180,13 +180,14 @@ CREATE OR REPLACE PROCEDURE sp_cadastrar_lista_padrao(
     p_funcionario_id BIGINT,
     p_escola_id BIGINT,
     p_ano_letivo INT,
-    p_serie VARCHAR
+    p_serie VARCHAR,
+    p_materiais JSONB DEFAULT '[]'::jsonb  -- array vazio por padrão
 )
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO lista_padrao (funcionario_id, escola_id, ano_letivo, serie)
-    VALUES (p_funcionario_id, p_escola_id, p_ano_letivo, p_serie);
+    INSERT INTO lista_padrao (funcionario_id, escola_id, ano_letivo, serie, materiais)
+    VALUES (p_funcionario_id, p_escola_id, p_ano_letivo, p_serie, p_materiais);
 END;
 $$;
 
