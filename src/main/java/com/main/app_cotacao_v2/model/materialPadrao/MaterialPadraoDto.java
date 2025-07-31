@@ -1,4 +1,4 @@
-package com.main.app_cotacao_v2.model.listaPadrao;
+package com.main.app_cotacao_v2.model.materialPadrao;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MaterialDto {
+public class MaterialPadraoDto {
 
     private String nome;
     private Integer quantidade;

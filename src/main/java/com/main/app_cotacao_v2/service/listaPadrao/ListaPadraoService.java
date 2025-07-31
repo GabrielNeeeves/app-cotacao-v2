@@ -8,7 +8,6 @@ import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoView;
 import com.main.app_cotacao_v2.repository.listaPadrao.ListaPadraoRepository;
 import com.main.app_cotacao_v2.repository.listaPadrao.ListaPadraoViewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -92,7 +91,7 @@ public class ListaPadraoService {
         ListaPadrao listaPadrao = optListaPadrao.get();
         listaPadrao.setSerie(dtoAtualizado.serie());
         listaPadrao.setAno_letivo(dtoAtualizado.ano_letivo()); // Usar anoLetivo
-        listaPadrao.setMateriais(dtoAtualizado.materiais()); // Seta a List<MaterialDto> diretamente
+        listaPadrao.setMateriais(dtoAtualizado.materiais()); // Seta a List<MaterialPadraoDto> diretamente
 
         // Adicione a lógica para buscar e setar Funcionario e Escola se for o caso
         // Exemplo:

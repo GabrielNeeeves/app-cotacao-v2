@@ -2,11 +2,16 @@ package com.main.app_cotacao_v2.model.listaPersonalizada;
 
 import com.main.app_cotacao_v2.model.aluno.Aluno;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadrao;
+import com.main.app_cotacao_v2.model.materialPadrao.MaterialPadraoDto;
 import com.main.app_cotacao_v2.model.usuariosModel.Cliente;
 import jakarta.persistence.*;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -31,8 +36,9 @@ public class ListaPersonalizada {
     @JoinColumn(name = "lista_padrao_id")
     private ListaPadrao listaPadrao;
 
-    @Column(nullable = false, columnDefinition = "jsonb")
-    private String materiais; // JSON personalizado
+    @JdbcTypeCode(SqlTypes.JSON) // Informa ao Hibernate para tratar este campo como JSON
+    @Column(name = "materiais", columnDefinition = "jsonb", nullable = false) // Mantém a definição da coluna para o DDL
+    private List<MaterialPadraoDto> materiais;
 
     public Long getId() {
         return id;
@@ -62,11 +68,11 @@ public class ListaPersonalizada {
         this.listaPadrao = listaPadrao;
     }
 
-    public String getMateriais() {
+    public List<MaterialPadraoDto> getMateriais() {
         return materiais;
     }
 
-    public void setMateriais(String materiais) {
+    public void setMateriais(List<MaterialPadraoDto> materiais) {
         this.materiais = materiais;
     }
 }

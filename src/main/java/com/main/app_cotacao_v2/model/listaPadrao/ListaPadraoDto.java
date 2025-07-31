@@ -1,5 +1,7 @@
 package com.main.app_cotacao_v2.model.listaPadrao;
 
+import com.main.app_cotacao_v2.model.materialPadrao.MaterialPadraoDto;
+
 import java.util.List;
 
 public record ListaPadraoDto(
@@ -7,6 +9,6 @@ public record ListaPadraoDto(
         Long escola_id,
         Integer ano_letivo,
         String serie,
-        List<MaterialDto> materiais
+        List<MaterialPadraoDto> materiais
 ) {
 }

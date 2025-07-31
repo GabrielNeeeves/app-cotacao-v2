@@ -39,7 +39,8 @@ SELECT
     esc.id AS escola_id,
     esc.nome AS escola_nome,
     lp.ano_letivo,
-    lp.serie
+    lp.serie,
+    lp.materiais
 FROM lista_padrao lp
 JOIN Funcionario f ON lp.funcionario_id = f.id
 JOIN Usuario u ON f.usuario_id = u.id

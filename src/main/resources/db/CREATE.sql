@@ -82,11 +82,15 @@ CREATE TABLE  lista_padrao (
     escola_id INT NOT NULL,
     ano_letivo INT NOT NULL,
     serie VARCHAR(20) NOT NULL,
+    materiais JSONB NOT NULL DEFAULT '[]',
     FOREIGN KEY (funcionario_id) REFERENCES Funcionario(id) ON DELETE CASCADE,
     FOREIGN KEY (escola_id) REFERENCES Escola(id) ON DELETE CASCADE
 );
-ALTER TABLE lista_padrao
-ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
+--ALTER TABLE lista_padrao
+--ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
+
+SELECT * FROM lista_padrao;
+
 
 -- Itens sugeridos na lista padrão
 CREATE TABLE material_padrao (
@@ -105,12 +109,13 @@ CREATE TABLE lista_personalizada (
     cliente_id INT NOT NULL,
     aluno_id INT NOT NULL,
     lista_padrao_id INT NOT NULL, -- base que ele personalizou
+    materiais JSONB NOT NULL DEFAULT '[]',
     FOREIGN KEY (cliente_id) REFERENCES Cliente(id) ON DELETE CASCADE,
     FOREIGN KEY (aluno_id) REFERENCES Aluno(id) ON DELETE CASCADE,
     FOREIGN KEY (lista_padrao_id) REFERENCES ListaPadrao(id) ON DELETE CASCADE
 );
-ALTER TABLE lista_personalizada
-ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
+--ALTER TABLE lista_personalizada
+--ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
 
 
 

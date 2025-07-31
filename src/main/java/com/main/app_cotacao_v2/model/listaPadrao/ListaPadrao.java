@@ -1,6 +1,7 @@
 package com.main.app_cotacao_v2.model.listaPadrao;
 
 import com.main.app_cotacao_v2.model.escola.Escola;
+import com.main.app_cotacao_v2.model.materialPadrao.MaterialPadraoDto;
 import com.main.app_cotacao_v2.model.usuariosModel.Funcionario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -39,7 +40,7 @@ public class ListaPadrao {
 
     @JdbcTypeCode(SqlTypes.JSON) // Informa ao Hibernate para tratar este campo como JSON
     @Column(name = "materiais", columnDefinition = "jsonb", nullable = false) // Mantém a definição da coluna para o DDL
-    private List<MaterialDto> materiais;
+    private List<MaterialPadraoDto> materiais;
 
     public Long getId() {
         return id;
@@ -77,11 +78,11 @@ public class ListaPadrao {
         this.serie = serie;
     }
 
-    public List<MaterialDto> getMateriais() {
+    public List<MaterialPadraoDto> getMateriais() {
         return materiais;
     }
 
-    public void setMateriais(List<MaterialDto> materiais) {
+    public void setMateriais(List<MaterialPadraoDto> materiais) {
         this.materiais = materiais;
     }
 }
