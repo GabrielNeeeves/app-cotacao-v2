@@ -1,13 +1,11 @@
 package com.main.app_cotacao_v2.model.ofertaMaterial;
 
-import com.main.app_cotacao_v2.model.listaPadrao.ListaPadrao;
+import com.main.app_cotacao_v2.model.material.Material;
 import com.main.app_cotacao_v2.model.usuariosModel.Funcionario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -20,27 +18,35 @@ public class OfertaMaterial {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "funcionario_id")
+    // FK para Funcionario
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id", nullable = false)
     private Funcionario funcionario;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "lista_padrao_id")
-    private ListaPadrao listaPadrao;
+    // FK para Material
+    @ManyToOne
+    @JoinColumn(name = "material_id", nullable = false)
+    private Material material;
 
-    @Column(nullable = false, length = 200)
-    private String nomeItem; // Nome do item do JSON ao qual a oferta se refere
+    @Column(nullable = false, precision = 10)
+    private Double preco;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal preco;
+    // prazo de entrega em dias
+    private Integer prazoEntrega;
 
-    private Integer prazoEntrega; // em dias
-
-    @Column(nullable = false)
+    @Column(columnDefinition = "integer default 1")
     private Integer quantidadeMinima = 1;
 
-    @Column(columnDefinition = "text")
     private String observacoes;
+
+    public OfertaMaterial(OfertaMaterialDto dto, Funcionario funcionario, Material material) {
+        this.funcionario = funcionario;
+        this.material = material;
+        this.preco = dto.preco();
+        this.prazoEntrega = dto.prazoEntrega();
+        this.quantidadeMinima = dto.quantidadeMinima() != null ? dto.quantidadeMinima() : 1;
+        this.observacoes = dto.observacoes();
+    }
 
     public Long getId() {
         return id;
@@ -54,27 +60,19 @@ public class OfertaMaterial {
         this.funcionario = funcionario;
     }
 
-    public ListaPadrao getListaPadrao() {
-        return listaPadrao;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setListaPadrao(ListaPadrao listaPadrao) {
-        this.listaPadrao = listaPadrao;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
-    public String getNomeItem() {
-        return nomeItem;
-    }
-
-    public void setNomeItem(String nomeItem) {
-        this.nomeItem = nomeItem;
-    }
-
-    public BigDecimal getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(BigDecimal preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 

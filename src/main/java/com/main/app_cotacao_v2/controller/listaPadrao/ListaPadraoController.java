@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/listas_padrao")
-public class ListaPadraoController {
+public class  ListaPadraoController {
 
     @Autowired
     private ListaPadraoService listaPadraoService;

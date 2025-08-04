@@ -2,11 +2,10 @@ package com.main.app_cotacao_v2.model.listaPersonalizada;
 
 import com.main.app_cotacao_v2.model.aluno.Aluno;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadrao;
-import com.main.app_cotacao_v2.model.materialPadrao.MaterialPadraoDto;
+import com.main.app_cotacao_v2.model.material.MaterialPadraoDto;
 import com.main.app_cotacao_v2.model.usuariosModel.Cliente;
 import jakarta.persistence.*;
 
-import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;

@@ -82,7 +82,8 @@ SELECT
     a.nome AS aluno_nome,
     lpb.id AS lista_padrao_id,
     lpb.ano_letivo,
-    lpb.serie
+    lpb.serie,
+    lp.materiais
 FROM lista_personalizada lp
 JOIN Cliente c ON lp.cliente_id = c.id
 JOIN Usuario u ON c.usuario_id = u.id

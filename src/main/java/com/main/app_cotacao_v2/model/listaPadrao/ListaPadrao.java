@@ -1,7 +1,7 @@
 package com.main.app_cotacao_v2.model.listaPadrao;
 
 import com.main.app_cotacao_v2.model.escola.Escola;
-import com.main.app_cotacao_v2.model.materialPadrao.MaterialPadraoDto;
+import com.main.app_cotacao_v2.model.material.MaterialPadraoDto;
 import com.main.app_cotacao_v2.model.usuariosModel.Funcionario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

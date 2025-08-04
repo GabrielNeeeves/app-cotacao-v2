@@ -1,6 +1,6 @@
 package com.main.app_cotacao_v2.model.listaPadrao;
 
-import com.main.app_cotacao_v2.model.materialPadrao.MaterialPadraoDto;
+import com.main.app_cotacao_v2.model.material.MaterialPadraoDto;
 
 import java.util.List;
 

@@ -208,15 +208,16 @@ $$;
 
 -- Cadastrar ListaPersonalizada
 CREATE OR REPLACE PROCEDURE sp_cadastrar_lista_personalizada(
-    p_cliente_id INT,
-    p_aluno_id INT,
-    p_lista_padrao_id INT
+    p_cliente_id BIGINT,
+    p_aluno_id BIGINT,
+    p_lista_padrao_id BIGINT,
+    p_materiais TEXT DEFAULT '[]'
 )
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO lista_personalizada (cliente_id, aluno_id, lista_padrao_id)
-    VALUES (p_cliente_id, p_aluno_id, p_lista_padrao_id);
+    INSERT INTO lista_personalizada (cliente_id, aluno_id, lista_padrao_id, materiais)
+    VALUES (p_cliente_id, p_aluno_id, p_lista_padrao_id, p_materiais::jsonb);
 END;
 $$;
 

@@ -1,4 +1,4 @@
-package com.main.app_cotacao_v2.model.materialPadrao;
+package com.main.app_cotacao_v2.model.material;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
