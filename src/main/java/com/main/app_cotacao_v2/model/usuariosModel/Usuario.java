@@ -95,15 +95,15 @@ public class Usuario implements UserDetails {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_ADMIN"),
                     new SimpleGrantedAuthority("ROLE_FUNCIONARIO"),
-                    new SimpleGrantedAuthority("ROLE_USER"));
+                    new SimpleGrantedAuthority("ROLE_CLIENTE"));
         }
         else if (this.role == Roles.FUNCIONARIO) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_FUNCIONARIO"),
-                    new SimpleGrantedAuthority("ROLE_USER"));
+                    new SimpleGrantedAuthority("ROLE_CLIENTE"));
         }
         else {
-            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+            return List.of(new SimpleGrantedAuthority("ROLE_CLIENTE"));
         }
     }
 
