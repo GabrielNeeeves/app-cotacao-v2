@@ -7,6 +7,7 @@ CREATE TABLE Usuario (
     role  VARCHAR(100) NOT NULL --CLIENTE, ADMINISTRADOR, FUNCIONARIO
 );
 SELECT * FROM usuario;
+DELETE FROM usuario
 
 -- Tabela Administrador
 CREATE TABLE Administrador (
