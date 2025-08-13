@@ -31,6 +31,11 @@ public class ListaPadraoService {
         return listaPadraoViewRepository.findAll();
     }
 
+    //GET BY ESCOLA NOME
+    public List<ListaPadraoView> getByEscolaName(String escolaName) {
+        return listaPadraoViewRepository.findByEscolaNome(escolaName);
+    }
+
     //GET BY ID
     public ListaPadraoView getListaPadraoById(Long id) {
         Optional<ListaPadraoView> optListaPadraoView = listaPadraoViewRepository.findById(id);

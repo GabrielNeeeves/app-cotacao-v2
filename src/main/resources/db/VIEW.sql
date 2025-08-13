@@ -118,6 +118,7 @@ FROM
 JOIN
     Usuario u ON c.usuario_id = u.id;
 
+SELECT * FROM vw_cliente;
 
 --View: Dados do Funcionario
 CREATE OR REPLACE VIEW vw_funcionario AS
@@ -135,6 +136,27 @@ FROM
     Funcionario f
 INNER JOIN
     Usuario u ON f.usuario_id = u.id;
+
+
+CREATE OR REPLACE VIEW vw_lista_padrao_escola AS
+SELECT 
+    lp.id AS lista_id,
+    lp.ano_letivo,
+    lp.serie,
+    lp.materiais,
+    e.id AS escola_id,
+    e.nome AS escola_nome,
+    e.endereco AS escola_endereco,
+    e.cnpj,
+    e.telefone,
+    e.tipo_escola
+FROM lista_padrao lp
+JOIN Escola e 
+    ON lp.escola_id = e.id;
+
+
+SELECT * FROM vw_lista_padrao_escola_expandida;
+
 
 
 

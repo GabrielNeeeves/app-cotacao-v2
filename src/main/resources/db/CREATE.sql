@@ -6,8 +6,7 @@ CREATE TABLE Usuario (
     senha VARCHAR(100) NOT NULL,
     role  VARCHAR(100) NOT NULL --CLIENTE, ADMINISTRADOR, FUNCIONARIO
 );
-SELECT * FROM usuario;
-DELETE FROM usuario
+SELECT * FROM escola;
 
 -- Tabela Administrador
 CREATE TABLE Administrador (
@@ -16,11 +15,10 @@ CREATE TABLE Administrador (
     FOREIGN KEY (usuario_id) REFERENCES Usuario(id) ON DELETE CASCADE
 );
 
-
 -- Tabela Cliente
 CREATE TABLE Cliente (
     id SERIAL PRIMARY KEY,
-    aluno_id INT NOT NULL,
+    aluno_id INT,
     usuario_id INT NOT NULL,
     FOREIGN KEY (aluno_id) REFERENCES Aluno(id) ON DELETE CASCADE,
     FOREIGN KEY (usuario_id) REFERENCES Usuario(id) ON DELETE CASCADE
@@ -61,6 +59,7 @@ CREATE TABLE Escola (
 	tipo_escola varchar(20),
 	check(tipo_escola IN('PUBLICA', 'PRIVADA'))
 );
+SELECT * FROM funcionario;
 
 CREATE TABLE Aluno (
 	id SERIAL PRIMARY KEY,

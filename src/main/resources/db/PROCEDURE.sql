@@ -37,7 +37,7 @@ END;
 $$;
 
 
-
+SELECT * FROM cliente
 
 -- Cadastrar Empresa
 CREATE OR REPLACE PROCEDURE sp_cadastrar_empresa(

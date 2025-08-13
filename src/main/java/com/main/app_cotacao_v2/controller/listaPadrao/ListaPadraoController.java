@@ -1,6 +1,5 @@
 package com.main.app_cotacao_v2.controller.listaPadrao;
 
-import com.main.app_cotacao_v2.model.listaPadrao.ListaPadrao;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoDto;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoView;
 import com.main.app_cotacao_v2.service.listaPadrao.ListaPadraoService;
@@ -22,6 +21,12 @@ public class  ListaPadraoController {
     @GetMapping
     public List<ListaPadraoView> getAllLIstaPadrao() {
         return listaPadraoService.getListaPadrao();
+    }
+
+    //GET BY ESCOLA NOME
+    @GetMapping("/por_escola")
+    public List<ListaPadraoView> getByEscolaNome(@RequestParam String escolaNome) {
+        return listaPadraoService.getByEscolaName(escolaNome);
     }
 
     //GET BY ID
