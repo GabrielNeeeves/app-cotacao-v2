@@ -1,6 +1,7 @@
 package com.main.app_cotacao_v2.controller.listaPadrao;
 
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoDto;
+import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoEscolaExpandidaView;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoView;
 import com.main.app_cotacao_v2.service.listaPadrao.ListaPadraoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class  ListaPadraoController {
 
     //GET BY ESCOLA NOME
     @GetMapping("/por_escola")
-    public List<ListaPadraoView> getByEscolaNome(@RequestParam String escolaNome) {
+    public List<ListaPadraoEscolaExpandidaView> getByEscolaNome(@RequestParam String escolaNome) {
         return listaPadraoService.getByEscolaName(escolaNome);
     }
 

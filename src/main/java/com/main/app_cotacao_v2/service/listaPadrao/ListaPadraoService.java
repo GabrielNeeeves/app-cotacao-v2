@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadrao;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoDto;
+import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoEscolaExpandidaView;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoView;
+import com.main.app_cotacao_v2.repository.listaPadrao.ListaPadraoEscolaExpandidaViewRepository;
 import com.main.app_cotacao_v2.repository.listaPadrao.ListaPadraoRepository;
 import com.main.app_cotacao_v2.repository.listaPadrao.ListaPadraoViewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class ListaPadraoService {
     private ListaPadraoViewRepository listaPadraoViewRepository;
 
     @Autowired
+    private ListaPadraoEscolaExpandidaViewRepository listaPadraoEscolaExpandidaViewRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
     //GET
@@ -32,8 +37,8 @@ public class ListaPadraoService {
     }
 
     //GET BY ESCOLA NOME
-    public List<ListaPadraoView> getByEscolaName(String escolaName) {
-        return listaPadraoViewRepository.findByEscolaNome(escolaName);
+    public List<ListaPadraoEscolaExpandidaView> getByEscolaName(String escolaName) {
+        return listaPadraoEscolaExpandidaViewRepository.findByEscolaNome(escolaName);
     }
 
     //GET BY ID

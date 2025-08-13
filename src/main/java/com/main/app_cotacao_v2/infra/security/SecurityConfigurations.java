@@ -36,7 +36,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register/**").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/listas_padrao").hasRole("CLIENTE")
+                        .requestMatchers(HttpMethod.GET, "/listas_padrao/**").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.POST, "/listas_padrao").hasRole("FUNCIONARIO")
                         .requestMatchers(HttpMethod.DELETE, "/listas_padrao").hasRole("FUNCIONARIO")
                         .requestMatchers(HttpMethod.PUT, "/listas_padrao").hasRole("FUNCIONARIO")
