@@ -10,6 +10,6 @@ public record ListaPadraoDto(
         Long escola_id,
         Integer ano_letivo,
         String serie,
-        List<MaterialDto> materiais
+        List<MaterialPadraoDto> materiais
 ) {
 }
