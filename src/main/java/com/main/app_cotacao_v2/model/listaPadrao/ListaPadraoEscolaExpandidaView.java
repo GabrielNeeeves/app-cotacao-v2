@@ -28,6 +28,6 @@ public class ListaPadraoEscolaExpandidaView {
     @Column(name = "escola_nome")
     private String escolaNome;
 
-    @Column(name = "material", columnDefinition = "jsonb")
-    private String material;
+    @Column(name = "materiais", columnDefinition = "jsonb")
+    private String materiais;
 }

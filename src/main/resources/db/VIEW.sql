@@ -155,7 +155,11 @@ JOIN Escola e
     ON lp.escola_id = e.id;
 
 
-SELECT * FROM vw_lista_padrao_escola_expandida;
+SELECT *
+FROM vw_lista_padrao_escola_expandida
+WHERE escola_nome = 'Escola Piriri';
+
+
 
 
 

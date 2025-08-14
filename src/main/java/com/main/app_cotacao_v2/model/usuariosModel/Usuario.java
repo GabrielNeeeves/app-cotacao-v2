@@ -93,7 +93,7 @@ public class Usuario implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == Roles.ADMINISTRADOR) {
             return List.of(
-                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_ADMINISTRADOR"),
                     new SimpleGrantedAuthority("ROLE_FUNCIONARIO"),
                     new SimpleGrantedAuthority("ROLE_CLIENTE"));
         }
