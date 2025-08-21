@@ -6,8 +6,8 @@ CREATE TABLE Usuario (
     senha VARCHAR(100) NOT NULL,
     role  VARCHAR(100) NOT NULL --CLIENTE, ADMINISTRADOR, FUNCIONARIO
 );
-SELECT * FROM escola;
-
+SELECT * FROM cliente lp ;
+SELECT * FROM Usuario lp ;
 -- Tabela Administrador
 CREATE TABLE Administrador (
     id SERIAL PRIMARY KEY,

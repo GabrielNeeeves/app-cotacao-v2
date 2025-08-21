@@ -155,6 +155,21 @@ JOIN Escola e
     ON lp.escola_id = e.id;
 
 
+DROP VIEW IF EXISTS vw_lista_padrao_escola_expandida;
+
+CREATE OR REPLACE VIEW vw_lista_padrao_escola_expandida AS
+SELECT 
+    lp.id AS lista_id,
+    lp.ano_letivo,
+    lp.serie,
+    e.nome AS escola_nome,
+    lp.materiais
+FROM lista_padrao lp
+JOIN escola e ON lp.escola_id = e.id;
+
+
+
+
 SELECT *
 FROM vw_lista_padrao_escola_expandida
 WHERE escola_nome = 'Escola Piriri';

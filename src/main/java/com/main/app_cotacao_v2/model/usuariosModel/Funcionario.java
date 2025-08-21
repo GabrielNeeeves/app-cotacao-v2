@@ -36,10 +36,6 @@ public class Funcionario {
     @JoinColumn(name = "escola_id")
     private Escola escola;
 
-
-
-    // A regra CHECK para exclusividade empresa_id X escola_id deve ser garantida na camada DB ou service
-
     public Long getId() {
         return id;
     }
