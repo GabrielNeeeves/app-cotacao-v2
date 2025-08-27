@@ -7,13 +7,16 @@ CREATE TABLE Usuario (
     role  VARCHAR(100) NOT NULL --CLIENTE, ADMINISTRADOR, FUNCIONARIO
 );
 SELECT * FROM cliente lp ;
+SELECT * FROM funcionario lp ;
 SELECT * FROM Usuario lp ;
+SELECT * FROM Administrador ;
 -- Tabela Administrador
 CREATE TABLE Administrador (
     id SERIAL PRIMARY KEY,
     usuario_id INT NOT NULL,
     FOREIGN KEY (usuario_id) REFERENCES Usuario(id) ON DELETE CASCADE
 );
+INSERT INTO USUARIO (NOME, EMAIL, SENHA, ROLE) VALUES ('admin', 'admin@teste', 'admin', 'ADMINISTRADOR');
 
 -- Tabela Cliente
 CREATE TABLE Cliente (

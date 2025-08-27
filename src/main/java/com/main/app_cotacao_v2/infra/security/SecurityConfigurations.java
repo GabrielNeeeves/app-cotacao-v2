@@ -50,7 +50,11 @@ public class SecurityConfigurations {
 
                         .requestMatchers("/empresas/**").hasRole("ADMINISTRADOR")
 
-                        .requestMatchers("/escolas/**").hasRole("ADMINISTRADOR")
+                        //.requestMatchers("/escolas/**").hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.GET, "/escolas/**").hasRole("CLIENTE")
+                        .requestMatchers(HttpMethod.POST, "/escolas/**").hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE, "/escolas/**").hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.PUT, "/escolas/**").hasRole("FUNCIONARIO")
 
                         .requestMatchers(HttpMethod.GET, "/ofertas").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.POST, "/ofertas").hasRole("FUNCIONARIO")
