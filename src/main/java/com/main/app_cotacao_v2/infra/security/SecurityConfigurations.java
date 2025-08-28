@@ -61,6 +61,11 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.DELETE, "/ofertas/**").hasRole("FUNCIONARIO")
                         .requestMatchers(HttpMethod.PUT, "/ofertas").hasRole("FUNCIONARIO")
 
+                        .requestMatchers(HttpMethod.GET, "/materiais/**").hasRole("CLIENTE")
+                        .requestMatchers(HttpMethod.POST, "/materiais/**").hasRole("FUNCIONARIO")
+                        .requestMatchers(HttpMethod.DELETE, "/materiais/**").hasRole("FUNCIONARIO")
+                        .requestMatchers(HttpMethod.PUT, "/materiais/**").hasRole("FUNCIONARIO")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
