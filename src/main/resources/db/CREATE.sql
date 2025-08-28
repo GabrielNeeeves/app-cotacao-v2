@@ -10,6 +10,9 @@ SELECT * FROM cliente lp ;
 SELECT * FROM funcionario lp ;
 SELECT * FROM Usuario lp ;
 SELECT * FROM Administrador ;
+
+SELECT * FROM escola
+
 -- Tabela Administrador
 CREATE TABLE Administrador (
     id SERIAL PRIMARY KEY,

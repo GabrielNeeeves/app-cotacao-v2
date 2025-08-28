@@ -13,6 +13,7 @@ BEGIN
 END;
 $$;
 
+SELECT * FROM escola
 
 
 -- Cadastrar Administrador em Usuario também
