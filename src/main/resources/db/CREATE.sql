@@ -55,6 +55,8 @@ CREATE TABLE Empresa (
 	cnpj VARCHAR(20) NULL
 );
 
+SELECT * FROM empresa
+
 
 CREATE TABLE Escola (
 	id SERIAL PRIMARY KEY,
@@ -122,22 +124,6 @@ CREATE TABLE lista_personalizada (
 );
 --ALTER TABLE lista_personalizada
 --ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
-
-
-
-
--- Itens escolhidos pelo cliente
---CREATE TABLE material_personalizado (
---    id SERIAL PRIMARY KEY,
---    id_lista_personalizada INT NOT NULL,
---    nome_material VARCHAR(200) NOT NULL,
---    quantidade INT NOT NULL,
---    marca_escolhida VARCHAR(100),
---    observacoes TEXT,
---    FOREIGN KEY (id_lista_personalizada) REFERENCES ListaPersonalizada(id) ON DELETE CASCADE
---); DROP TABLE material_personalizado cascade
-
-
 
 
 -- Oferta feita por um funcionário de empresa para esse item
