@@ -12,6 +12,7 @@ public interface ListaPadraoRepository extends JpaRepository<ListaPadrao, Long> 
             @Param("p_funcionario_id") Long funcionario_id,
             @Param("p_escola_id") Long escola_id,
             @Param("p_ano_letivo") Integer ano_letivo,
-            @Param("p_serie") String serie
-    );
+            @Param("p_serie") String serie,
+            @Param("p_materiais") String materiais
+            );
 }

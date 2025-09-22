@@ -1,6 +1,7 @@
 package com.main.app_cotacao_v2.controller.listaPadrao;
 
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoDto;
+import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoEscolaExpandidaView;
 import com.main.app_cotacao_v2.model.listaPadrao.ListaPadraoView;
 import com.main.app_cotacao_v2.service.listaPadrao.ListaPadraoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/listas_padrao")
-public class ListaPadraoController {
+public class  ListaPadraoController {
 
     @Autowired
     private ListaPadraoService listaPadraoService;
@@ -21,6 +22,12 @@ public class ListaPadraoController {
     @GetMapping
     public List<ListaPadraoView> getAllLIstaPadrao() {
         return listaPadraoService.getListaPadrao();
+    }
+
+    //GET BY ESCOLA NOME
+    @GetMapping("/por_escola")
+    public List<ListaPadraoEscolaExpandidaView> getByEscolaNome(@RequestParam String escolaNome) {
+        return listaPadraoService.getByEscolaName(escolaNome);
     }
 
     //GET BY ID
@@ -36,8 +43,8 @@ public class ListaPadraoController {
 
     //POST
     @PostMapping
-    public ResponseEntity<String> postListaPadrao(@RequestBody ListaPadraoDto dto) {
-        return listaPadraoService.postListaPadrao(dto);
+    public void postListaPadrao(@RequestBody ListaPadraoDto dto) {
+        listaPadraoService.postListaPadrao(dto);
     }
 
     //DELETE

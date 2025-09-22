@@ -50,7 +50,7 @@ public class ClienteController {
             return new ResponseEntity<>("Cliente deletado com sucesso", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao deletar cliente: " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                    HttpStatus.NOT_FOUND);
         }
     }
 

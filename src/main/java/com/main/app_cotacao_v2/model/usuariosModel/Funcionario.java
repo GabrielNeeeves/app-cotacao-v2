@@ -3,6 +3,7 @@ package com.main.app_cotacao_v2.model.usuariosModel;
 import com.main.app_cotacao_v2.model.empresa.Empresa;
 import com.main.app_cotacao_v2.model.escola.Escola;
 import com.main.app_cotacao_v2.model.usuariosModel.dto.FuncionarioDto;
+import com.main.app_cotacao_v2.model.usuariosModel.dto.UsuarioDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,8 +35,6 @@ public class Funcionario {
     @ManyToOne
     @JoinColumn(name = "escola_id")
     private Escola escola;
-
-    // A regra CHECK para exclusividade empresa_id X escola_id deve ser garantida na camada DB ou service
 
     public Long getId() {
         return id;

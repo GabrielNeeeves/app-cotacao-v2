@@ -1,11 +1,18 @@
 package com.main.app_cotacao_v2.model.listaPadrao;
 
 import com.main.app_cotacao_v2.model.escola.Escola;
+import com.main.app_cotacao_v2.model.material.MaterialDto;
+import com.main.app_cotacao_v2.model.material.MaterialPadraoDto;
 import com.main.app_cotacao_v2.model.usuariosModel.Funcionario;
-import com.main.app_cotacao_v2.repository.usuariosRepository.FuncionarioRepository;
-import com.main.app_cotacao_v2.service.escola.EscolaService;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -13,6 +20,7 @@ import lombok.*;
 @Entity
 @Table(name = "lista_padrao")
 public class ListaPadrao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,41 +37,38 @@ public class ListaPadrao {
     private Integer ano_letivo;
 
     @Column(nullable = false, length = 20)
-    private String serie;                       // 1° A, 2°C, etc
+    private String serie;
 
-    public ListaPadrao(ListaPadraoDto dto, FuncionarioRepository funcionarioRepository, EscolaService escolaService) {
-        funcionario_id = funcionarioRepository.findById(dto.funcionario_id()).get();
-        escola_id = escolaService.getEscolaById(dto.escola_id());
-        ano_letivo = dto.ano_letivo();
-        serie = dto.serie();
-    }
+    @JdbcTypeCode(SqlTypes.JSON) // Informa ao Hibernate para tratar este campo como JSON
+    @Column(name = "materiais", columnDefinition = "jsonb", nullable = false) // Mantém a definição da coluna para o DDL
+    private List<MaterialPadraoDto> materiais;
 
     public Long getId() {
         return id;
     }
 
-    public Funcionario getFuncionario_id() {
+    public Funcionario getFuncionario() {
         return funcionario_id;
     }
 
-    public void setFuncionario_id(Funcionario funcionario_id) {
-        this.funcionario_id = funcionario_id;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario_id = funcionario;
     }
 
-    public Escola getEscola_id() {
+    public Escola getEscola() {
         return escola_id;
     }
 
-    public void setEscola_id(Escola escola_id) {
-        this.escola_id = escola_id;
+    public void setEscola(Escola escola) {
+        this.escola_id = escola;
     }
 
     public Integer getAno_letivo() {
         return ano_letivo;
     }
 
-    public void setAno_letivo(Integer ano_letivo) {
-        this.ano_letivo = ano_letivo;
+    public void setAno_letivo(Integer anoLetivo) {
+        this.ano_letivo = anoLetivo;
     }
 
     public String getSerie() {
@@ -73,4 +78,13 @@ public class ListaPadrao {
     public void setSerie(String serie) {
         this.serie = serie;
     }
+
+    public List<MaterialPadraoDto> getMateriais() {
+        return materiais;
+    }
+
+    public void setMateriais(List<MaterialPadraoDto> materiais) {
+        this.materiais = materiais;
+    }
 }
+

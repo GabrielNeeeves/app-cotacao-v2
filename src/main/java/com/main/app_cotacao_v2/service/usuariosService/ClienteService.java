@@ -40,9 +40,11 @@ public class ClienteService {
     //POST
     public ResponseEntity<String> cadastrarClienteComUsuario(ClienteDto dto) {
         try {
-            Optional<Aluno> alunoExiste = alunoRepo.findById(dto.alunoId());
-            if(alunoExiste.isEmpty()) {
-                throw new RuntimeException("Aluno com ID " + dto.alunoId() + " não foi encontrado");
+            if (dto.alunoId() != null) {
+                Optional<Aluno> alunoExiste = alunoRepo.findById(dto.alunoId());
+                if (alunoExiste.isEmpty()) {
+                    throw new RuntimeException("Aluno com ID " + dto.alunoId() + " não foi encontrado");
+                }
             }
 
             clienteRepo.cadastrarClienteComUsuario(dto.nome(), dto.email(), dto.senha(), dto.alunoId());
@@ -51,6 +53,7 @@ public class ClienteService {
             return new ResponseEntity<>("Erro ao cadastrar cliente: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     //DELETE
     public void deleteClienteById(Long id) {

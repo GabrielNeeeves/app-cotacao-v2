@@ -13,6 +13,7 @@ BEGIN
 END;
 $$;
 
+SELECT * FROM escola
 
 
 -- Cadastrar Administrador em Usuario também
@@ -37,7 +38,7 @@ END;
 $$;
 
 
-
+SELECT * FROM cliente
 
 -- Cadastrar Empresa
 CREATE OR REPLACE PROCEDURE sp_cadastrar_empresa(
@@ -180,13 +181,14 @@ CREATE OR REPLACE PROCEDURE sp_cadastrar_lista_padrao(
     p_funcionario_id BIGINT,
     p_escola_id BIGINT,
     p_ano_letivo INT,
-    p_serie VARCHAR
+    p_serie VARCHAR,
+    p_materiais TEXT DEFAULT '[]'
 )
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO lista_padrao (funcionario_id, escola_id, ano_letivo, serie)
-    VALUES (p_funcionario_id, p_escola_id, p_ano_letivo, p_serie);
+    INSERT INTO lista_padrao (funcionario_id, escola_id, ano_letivo, serie, materiais)
+    VALUES (p_funcionario_id, p_escola_id, p_ano_letivo, p_serie, p_materiais::jsonb);
 END;
 $$;
 
@@ -207,15 +209,16 @@ $$;
 
 -- Cadastrar ListaPersonalizada
 CREATE OR REPLACE PROCEDURE sp_cadastrar_lista_personalizada(
-    p_cliente_id INT,
-    p_aluno_id INT,
-    p_lista_padrao_id INT
+    p_cliente_id BIGINT,
+    p_aluno_id BIGINT,
+    p_lista_padrao_id BIGINT,
+    p_materiais TEXT DEFAULT '[]'
 )
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO lista_personalizada (cliente_id, aluno_id, lista_padrao_id)
-    VALUES (p_cliente_id, p_aluno_id, p_lista_padrao_id);
+    INSERT INTO lista_personalizada (cliente_id, aluno_id, lista_padrao_id, materiais)
+    VALUES (p_cliente_id, p_aluno_id, p_lista_padrao_id, p_materiais::jsonb);
 END;
 $$;
 
