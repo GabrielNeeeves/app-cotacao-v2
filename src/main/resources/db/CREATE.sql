@@ -11,7 +11,8 @@ SELECT * FROM funcionario lp ;
 SELECT * FROM Usuario lp ;
 SELECT * FROM Administrador ;
 
-SELECT * FROM escola
+
+SELECT * FROM ofertas
 
 -- Tabela Administrador
 CREATE TABLE Administrador (
@@ -145,5 +146,22 @@ ALTER TABLE oferta_material
     ADD CONSTRAINT oferta_material_lista_padrao_id_fkey
         FOREIGN KEY (lista_padrao_id) REFERENCES lista_padrao(id) ON DELETE CASCADE;
 
-DROP VIEW IF EXISTS vw_ofertas_material;
+SELECT * FROM oferta_material om
+SELECT * FROM material
+SELECT * FROM oferta_material_lista
+
+-- tabela principal
+CREATE TABLE oferta_material_lista (
+    id SERIAL PRIMARY KEY
+);
+
+-- tabela de relação (armazena a lista de IDs)
+CREATE TABLE oferta_material_lista_ofertas (
+    lista_id INT NOT NULL,
+    oferta_material_id INT NOT NULL,
+    PRIMARY KEY (lista_id, oferta_material_id),
+    FOREIGN KEY (lista_id) REFERENCES oferta_material_lista(id) ON DELETE CASCADE,
+    FOREIGN KEY (oferta_material_id) REFERENCES oferta_material(id) ON DELETE CASCADE
+);
+
 

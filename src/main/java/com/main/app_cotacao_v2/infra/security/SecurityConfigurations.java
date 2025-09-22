@@ -48,8 +48,6 @@ public class SecurityConfigurations {
 
                         .requestMatchers("/alunos/**").hasRole("CLIENTE")
 
-                        .requestMatchers("/empresas/**").hasRole("ADMINISTRADOR")
-
                         .requestMatchers(HttpMethod.GET, "/escolas/**").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.POST, "/escolas/**").hasRole("ADMINISTRADOR")
                         .requestMatchers(HttpMethod.DELETE, "/escolas/**").hasRole("ADMINISTRADOR")
@@ -69,6 +67,15 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/materiais/**").hasRole("FUNCIONARIO")
                         .requestMatchers(HttpMethod.DELETE, "/materiais/**").hasRole("FUNCIONARIO")
                         .requestMatchers(HttpMethod.PUT, "/materiais/**").hasRole("FUNCIONARIO")
+
+                        .requestMatchers(HttpMethod.GET, "/empresas").hasRole("CLIENTE")
+                        .requestMatchers(HttpMethod.POST, "/empresas/**").hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE, "/empresas/**").hasRole("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.PUT, "/empresas/**").hasRole("ADMINISTRADOR")
+
+                        .requestMatchers(HttpMethod.GET, "/inventario").hasRole("CLIENTE")
+                        .requestMatchers(HttpMethod.POST, "/inventario/**").hasRole("CLIENTE")
+                        .requestMatchers(HttpMethod.DELETE, "/inventario/**").hasRole("CLIENTE")
 
                         .anyRequest().authenticated()
                 )
