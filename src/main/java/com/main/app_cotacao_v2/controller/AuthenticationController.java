@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,14 +35,22 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthenticationDto dto) {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody AuthenticationDto dto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(dto.email(), dto.senha());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((Usuario) auth.getPrincipal());
+        var usuario = (Usuario) auth.getPrincipal();
+        var token = tokenService.generateToken(usuario);
 
-        return ResponseEntity.ok(new LoginResponseDto(token));
+        // Pega a primeira role (supondo que cada usuário tenha uma)
+        String role = usuario.getAuthorities().stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse("ROLE_CLIENTE");
+
+        return ResponseEntity.ok(new LoginResponseDto(token, role));
     }
+
 
     // REGISTRAR CLIENTE
     @PostMapping("/register/cliente")
