@@ -9,6 +9,7 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
     @Procedure(procedureName = "sp_cadastrar_aluno")
     void cadastrarAluno(
+            @Param("p_cliente_id") Long cliente_id,
             @Param("p_escola_id") Long escola_id,
             @Param("p_nome") String nome,
             @Param("p_serie") String serie,

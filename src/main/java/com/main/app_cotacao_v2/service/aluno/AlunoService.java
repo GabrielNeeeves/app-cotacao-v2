@@ -40,6 +40,7 @@ public class AlunoService {
     public ResponseEntity<String> postAluno(AlunoDto dto) {
         try {
             alunoRepo.cadastrarAluno(
+                    dto.clienteId(),
                     dto.escolaId(),
                     dto.nome(),
                     dto.serie(),

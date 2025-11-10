@@ -1,7 +1,9 @@
 package com.main.app_cotacao_v2.model.aluno;
 
 import com.main.app_cotacao_v2.model.escola.Escola;
+import com.main.app_cotacao_v2.model.usuariosModel.Cliente;
 import com.main.app_cotacao_v2.repository.escolaRepository.EscolaRepository;
+import com.main.app_cotacao_v2.repository.usuariosRepository.ClienteRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +18,10 @@ public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "escola_id")
@@ -36,15 +42,29 @@ public class Aluno {
     @Column(length=200)
     private String observacoes;
 
-    public Aluno(AlunoDto dto, EscolaRepository escolaRepository) {
-        this.escola = escolaRepository.findById(dto.escolaId())
-                .orElseThrow(() -> new IllegalArgumentException("Escola não encontrada com ID: " + dto.escolaId()));
+    public Aluno(
+            AlunoDto dto,
+            EscolaRepository escolaRepository,
+            ClienteRepository clienteRepository
+    ) {
+        // ✅ Carrega cliente
+        this.cliente = clienteRepository.findById(dto.clienteId())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Cliente não encontrado com ID: " + dto.clienteId()
+                ));
 
-        nome = dto.nome();
-        serie = dto.serie();
-        turno = dto.turno();
-        anoLetivo = dto.anoLetivo();
-        observacoes = dto.observacoes();
+        // ✅ Carrega escola
+        this.escola = escolaRepository.findById(dto.escolaId())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Escola não encontrada com ID: " + dto.escolaId()
+                ));
+
+        // ✅ Copia dados simples
+        this.nome = dto.nome();
+        this.serie = dto.serie();
+        this.turno = dto.turno();
+        this.anoLetivo = dto.anoLetivo();
+        this.observacoes = dto.observacoes();
     }
 
     public Long getId() {

@@ -82,6 +82,14 @@ CREATE TABLE Aluno (
 	FOREIGN KEY(escola_id) REFERENCES Escola(id)
 );
 
+SELECT *
+FROM aluno
+
+ALTER TABLE Aluno
+ADD COLUMN cliente_id INT,
+ADD CONSTRAINT fk_aluno_cliente
+    FOREIGN KEY (cliente_id) REFERENCES Cliente(id) ON DELETE CASCADE;
+
 
 
 -- Lista padrão criada pelo funcionário

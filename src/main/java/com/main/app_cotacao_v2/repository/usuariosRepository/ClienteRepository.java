@@ -5,7 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+
+    Optional<Cliente> findByUsuarioId(Long usuarioId);
 
     // Procedure simples: recebe os IDs
     @Procedure(procedureName = "sp_cadastrar_cliente")

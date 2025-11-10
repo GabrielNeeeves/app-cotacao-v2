@@ -23,4 +23,8 @@ public class Cliente {
     @OneToOne(optional = false)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    public Long getId() {
+        return id;
+    }
 }

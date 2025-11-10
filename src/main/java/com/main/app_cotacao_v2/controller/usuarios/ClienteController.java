@@ -1,6 +1,7 @@
 package com.main.app_cotacao_v2.controller.usuarios;
 
 import com.main.app_cotacao_v2.model.usuariosModel.ClienteView;
+import com.main.app_cotacao_v2.model.usuariosModel.Usuario;
 import com.main.app_cotacao_v2.model.usuariosModel.dto.ClienteDto;
 import com.main.app_cotacao_v2.repository.usuariosRepository.ClienteRepository;
 import com.main.app_cotacao_v2.repository.usuariosRepository.ClienteViewRepository;
@@ -18,10 +19,20 @@ import java.util.Optional;
 public class ClienteController {
 
     @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
     private ClienteViewRepository clienteViewRepository;
-
     @Autowired
     private ClienteService clienteService;
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getClienteLogado(@AuthenticationPrincipal Usuario usuario) {
+
+        var cliente = clienteRepository.findByUsuarioId(usuario.getId())
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado para este usuário"));
+
+        return ResponseEntity.ok(cliente);
+    }
 
     //GET
     @GetMapping

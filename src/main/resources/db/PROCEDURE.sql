@@ -97,6 +97,7 @@ $$;
 
 -- Cadastrar Aluno
 CREATE OR REPLACE PROCEDURE sp_cadastrar_aluno(
+    p_cliente_id BIGINT,
     p_escola_id BIGINT,
     p_nome VARCHAR,
     p_serie VARCHAR,
@@ -107,10 +108,11 @@ CREATE OR REPLACE PROCEDURE sp_cadastrar_aluno(
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO Aluno (escola_id, nome, serie, turno, ano_letivo, observacoes)
-    VALUES (p_escola_id, p_nome, p_serie, p_turno, p_ano_letivo, p_observacoes);
+    INSERT INTO Aluno (cliente_id, escola_id, nome, serie, turno, ano_letivo, observacoes)
+    VALUES (p_cliente_id, p_escola_id, p_nome, p_serie, p_turno, p_ano_letivo, p_observacoes);
 END;
 $$;
+
 
 
 -- Cadastrar Cliente com aluno e usuário ao "mesmo tempo"

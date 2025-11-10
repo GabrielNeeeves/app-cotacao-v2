@@ -1,6 +1,7 @@
 package com.main.app_cotacao_v2.controller;
 
 import com.main.app_cotacao_v2.infra.security.TokenService;
+import com.main.app_cotacao_v2.model.usuariosModel.Cliente;
 import com.main.app_cotacao_v2.model.usuariosModel.Usuario;
 import com.main.app_cotacao_v2.model.usuariosModel.dto.*;
 import com.main.app_cotacao_v2.model.usuariosModel.roles.Roles;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -36,21 +39,32 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody AuthenticationDto dto) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(dto.email(), dto.senha());
+        var usernamePassword =
+                new UsernamePasswordAuthenticationToken(dto.email(), dto.senha());
+
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var usuario = (Usuario) auth.getPrincipal();
         var token = tokenService.generateToken(usuario);
 
-        // Pega a primeira role (supondo que cada usuário tenha uma)
+        // Pega a role
         String role = usuario.getAuthorities().stream()
                 .findFirst()
                 .map(GrantedAuthority::getAuthority)
                 .orElse("ROLE_CLIENTE");
 
-        return ResponseEntity.ok(new LoginResponseDto(token, role));
-    }
+        // ✅ Busca o cliente pelo ID do usuário
+        var cliente = clienteRepository.findByUsuarioId(usuario.getId()).orElse(null);
+        Long clienteId = cliente != null ? cliente.getId() : null;
 
+        return ResponseEntity.ok(
+                new LoginResponseDto(
+                        token,
+                        role,
+                        clienteId   // ✅ Enviando o clienteId
+                )
+        );
+    }
 
     // REGISTRAR CLIENTE
     @PostMapping("/register/cliente")
