@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 
@@ -18,5 +19,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
             @Param("p_empresa_id") Integer empresaId,
             @Param("p_escola_id") Integer escolaId
     );
+
+    Optional<Funcionario> findByUsuarioId(Long usuarioId);
 
 }

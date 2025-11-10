@@ -2,6 +2,7 @@ package com.main.app_cotacao_v2.controller;
 
 import com.main.app_cotacao_v2.infra.security.TokenService;
 import com.main.app_cotacao_v2.model.usuariosModel.Cliente;
+import com.main.app_cotacao_v2.model.usuariosModel.Funcionario;
 import com.main.app_cotacao_v2.model.usuariosModel.Usuario;
 import com.main.app_cotacao_v2.model.usuariosModel.dto.*;
 import com.main.app_cotacao_v2.model.usuariosModel.roles.Roles;
@@ -39,29 +40,41 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody AuthenticationDto dto) {
+
         var usernamePassword =
                 new UsernamePasswordAuthenticationToken(dto.email(), dto.senha());
 
+        // Faz autenticação
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
+        // Usuário autenticado
         var usuario = (Usuario) auth.getPrincipal();
+
+        // Gera token JWT
         var token = tokenService.generateToken(usuario);
 
-        // Pega a role
+        // Extrai a ROLE do usuário
         String role = usuario.getAuthorities().stream()
                 .findFirst()
                 .map(GrantedAuthority::getAuthority)
                 .orElse("ROLE_CLIENTE");
 
-        // ✅ Busca o cliente pelo ID do usuário
-        var cliente = clienteRepository.findByUsuarioId(usuario.getId()).orElse(null);
-        Long clienteId = cliente != null ? cliente.getId() : null;
+        // Busca IDs específicos conforme o tipo de usuário
+        Long clienteId = clienteRepository.findByUsuarioId(usuario.getId())
+                .map(Cliente::getId)
+                .orElse(null);
 
+        Long funcionarioId = funcionarioRepository.findByUsuarioId(usuario.getId())
+                .map(Funcionario::getId)
+                .orElse(null);
+
+        // Retorna tudo junto
         return ResponseEntity.ok(
                 new LoginResponseDto(
                         token,
                         role,
-                        clienteId   // ✅ Enviando o clienteId
+                        clienteId,
+                        funcionarioId
                 )
         );
     }
