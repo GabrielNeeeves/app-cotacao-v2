@@ -64,17 +64,28 @@ public class AuthenticationController {
                 .map(Cliente::getId)
                 .orElse(null);
 
-        Long funcionarioId = funcionarioRepository.findByUsuarioId(usuario.getId())
+        var funcionarioOpt = funcionarioRepository.findByUsuarioId(usuario.getId());
+
+        Long funcionarioId = funcionarioOpt
                 .map(Funcionario::getId)
                 .orElse(null);
 
-        // Retorna tudo junto
+        Long empresaId = funcionarioOpt
+                .map(f -> f.getEmpresa() != null ? f.getEmpresa().getId() : null)
+                .orElse(null);
+
+        Long escolaId = funcionarioOpt
+                .map(f -> f.getEscola() != null ? f.getEscola().getId() : null)
+                .orElse(null);
+
         return ResponseEntity.ok(
                 new LoginResponseDto(
                         token,
                         role,
                         clienteId,
-                        funcionarioId
+                        funcionarioId,
+                        empresaId,
+                        escolaId
                 )
         );
     }

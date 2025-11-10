@@ -4,6 +4,8 @@ public record LoginResponseDto(
         String token,
         String role,
         Long clienteId,
-        Long funcionarioId
+        Long funcionarioId,
+        Long empresaId,
+        Long escolaId
 ) {
 }
