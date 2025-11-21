@@ -46,6 +46,8 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.DELETE, "/alunos/**").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.PUT, "/alunos").hasRole("FUNCIONARIO")
 
+                        .requestMatchers(HttpMethod.GET, "/clientes").hasRole("CLIENTE")
+
                         .requestMatchers(HttpMethod.GET, "/listas_personalizada").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.POST, "/listas_personalizada").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.DELETE, "/listas_personalizada/**").hasRole("CLIENTE")

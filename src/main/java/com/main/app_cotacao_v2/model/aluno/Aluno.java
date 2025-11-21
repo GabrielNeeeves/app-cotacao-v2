@@ -1,5 +1,6 @@
 package com.main.app_cotacao_v2.model.aluno;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.main.app_cotacao_v2.model.escola.Escola;
 import com.main.app_cotacao_v2.model.usuariosModel.Cliente;
 import com.main.app_cotacao_v2.repository.escolaRepository.EscolaRepository;
@@ -19,6 +20,7 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;

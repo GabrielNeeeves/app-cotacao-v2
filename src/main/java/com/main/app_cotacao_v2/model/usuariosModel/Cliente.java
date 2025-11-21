@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,9 +18,8 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(optional = true)
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+    @OneToMany(mappedBy = "cliente")
+    private List<Aluno> alunos;
 
     @OneToOne(optional = false)
     @JoinColumn(name = "usuario_id")
@@ -26,5 +27,9 @@ public class Cliente {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
     }
 }

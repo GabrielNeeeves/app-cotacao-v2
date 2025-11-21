@@ -1,5 +1,7 @@
 package com.main.app_cotacao_v2.controller.usuarios;
 
+import com.main.app_cotacao_v2.model.aluno.Aluno;
+import com.main.app_cotacao_v2.model.usuariosModel.Cliente;
 import com.main.app_cotacao_v2.model.usuariosModel.ClienteView;
 import com.main.app_cotacao_v2.model.usuariosModel.Usuario;
 import com.main.app_cotacao_v2.model.usuariosModel.dto.ClienteDto;
@@ -38,6 +40,15 @@ public class ClienteController {
     @GetMapping
     public List<ClienteView> getAllClientesDetalhes() {
         return clienteViewRepository.findAll();
+    }
+
+    //RETORNAR OS ALUNOS DE UM CLIENTE PELO SEU ID
+    @GetMapping("/{id}/alunos")
+    public List<Aluno> listar(@PathVariable Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        return cliente.getAlunos();
     }
 
     //GET BY ID
