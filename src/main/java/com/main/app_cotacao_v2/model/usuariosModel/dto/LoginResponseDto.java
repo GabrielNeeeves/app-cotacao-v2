@@ -6,6 +6,8 @@ public record LoginResponseDto(
         Long clienteId,
         Long funcionarioId,
         Long empresaId,
-        Long escolaId
+        Long escolaId,
+        String empresa,
+        String escola
 ) {
 }

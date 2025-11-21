@@ -78,6 +78,14 @@ public class AuthenticationController {
                 .map(f -> f.getEscola() != null ? f.getEscola().getId() : null)
                 .orElse(null);
 
+        String empresa = funcionarioOpt
+                .map(f -> f.getEmpresa() != null ? f.getEmpresa().getNome() : null)
+                .orElse(null);
+
+        String escola = funcionarioOpt
+                .map(f -> f.getEscola() != null ? f.getEscola().getNome() : null)
+                .orElse(null);
+
         return ResponseEntity.ok(
                 new LoginResponseDto(
                         token,
@@ -85,7 +93,9 @@ public class AuthenticationController {
                         clienteId,
                         funcionarioId,
                         empresaId,
-                        escolaId
+                        escolaId,
+                        empresa,
+                        escola
                 )
         );
     }
