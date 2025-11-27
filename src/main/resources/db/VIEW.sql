@@ -137,6 +137,8 @@ FROM
 INNER JOIN
     Usuario u ON f.usuario_id = u.id;
 
+--View: Listar os alunos com o ID do cliente
+
 
 CREATE OR REPLACE VIEW vw_lista_padrao_escola AS
 SELECT 

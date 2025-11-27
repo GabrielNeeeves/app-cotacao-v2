@@ -10,7 +10,28 @@ SELECT * FROM cliente lp ;
 SELECT * FROM funcionario lp ;
 SELECT * FROM Usuario lp ;
 SELECT * FROM Administrador ;
+SELECT * FROM Aluno ;
 
+DROP VIEW IF EXISTS vw_alunos_clientes CASCADE;
+DROP VIEW IF EXISTS vw_cliente_detalhes CASCADE;
+DROP VIEW IF EXISTS vw_cliente CASCADE;
+
+ALTER TABLE cliente DROP COLUMN aluno_id;
+
+ALTER TABLE aluno
+ADD CONSTRAINT fk_aluno_cliente
+FOREIGN KEY (cliente_id)
+REFERENCES cliente(id)
+ON DELETE CASCADE;
+
+ALTER TABLE aluno
+ADD COLUMN cliente_id INT NOT NULL;
+
+ALTER TABLE aluno
+ADD CONSTRAINT fk_aluno_cliente
+FOREIGN KEY (cliente_id)
+REFERENCES cliente(id)
+ON DELETE CASCADE;
 
 SELECT * FROM ofertas
 
@@ -135,8 +156,6 @@ CREATE TABLE lista_personalizada (
     FOREIGN KEY (aluno_id) REFERENCES Aluno(id) ON DELETE CASCADE,
     FOREIGN KEY (lista_padrao_id) REFERENCES ListaPadrao(id) ON DELETE CASCADE
 );
---ALTER TABLE lista_personalizada
---ADD COLUMN materiais JSONB NOT NULL DEFAULT '[]';
 
 
 -- Oferta feita por um funcionário de empresa para esse item
@@ -161,6 +180,9 @@ ALTER TABLE oferta_material
 SELECT * FROM oferta_material om
 SELECT * FROM material
 SELECT * FROM oferta_material_lista
+
+SELECT *
+FROM oferta_material_lista_ofertas
 
 -- tabela principal
 CREATE TABLE oferta_material_lista (

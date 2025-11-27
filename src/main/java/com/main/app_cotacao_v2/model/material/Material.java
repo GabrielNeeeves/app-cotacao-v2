@@ -15,19 +15,18 @@ public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false, length = 200)
     private String nome;
-
     private String descricao;
-
     @Column(length = 100)
     private String categoria;
+    private String fabricante;
 
     public Material(MaterialDto dto) {
         nome = dto.nome();
         descricao = dto.descricao();
         categoria = dto.categoria();
+        fabricante = dto.fabricante();
     }
 
     public Long getId() {
@@ -56,5 +55,13 @@ public class Material {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
     }
 }

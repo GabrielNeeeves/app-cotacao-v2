@@ -50,6 +50,7 @@ public class MaterialController {
         material.setNome(materialDto.nome());
         material.setDescricao(materialDto.descricao());
         material.setCategoria(materialDto.categoria());
+        material.setFabricante(materialDto.fabricante());
         materialRepository.save(material);
 
         return new ResponseEntity<>(HttpStatus.OK);
