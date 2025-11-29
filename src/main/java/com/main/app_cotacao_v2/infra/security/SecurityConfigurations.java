@@ -82,6 +82,7 @@ public class SecurityConfigurations {
 
                         .requestMatchers(HttpMethod.GET, "/inventario").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.POST, "/inventario/**").hasRole("CLIENTE")
+                        .requestMatchers(HttpMethod.PUT, "/inventario/**").hasRole("CLIENTE")
                         .requestMatchers(HttpMethod.DELETE, "/inventario/**").hasRole("CLIENTE")
 
                         .requestMatchers(HttpMethod.POST, "/pagamentos/criar_preferencia").hasRole("CLIENTE")

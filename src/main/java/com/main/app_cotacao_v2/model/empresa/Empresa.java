@@ -24,10 +24,13 @@ public class Empresa {
     @Column(length=20)
     private String cnpj;
 
+    private String telefone;
+
     public Empresa(EmpresaDto dto) {
         nome = dto.nome();
         endereco = dto.endereco();
         cnpj = dto.cnpj();
+        telefone = dto.telefone();
     }
 
     public Long getId() {
@@ -56,6 +59,14 @@ public class Empresa {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }
 

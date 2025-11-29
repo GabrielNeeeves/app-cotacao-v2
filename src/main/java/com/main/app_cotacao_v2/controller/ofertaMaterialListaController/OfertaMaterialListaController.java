@@ -1,8 +1,10 @@
 package com.main.app_cotacao_v2.controller.ofertaMaterialListaController;
 
 import com.main.app_cotacao_v2.model.ofertaMaterialLista.OfertaMaterialLista;
+import com.main.app_cotacao_v2.model.ofertaMaterialLista.OfertaMaterialListaDto;
 import com.main.app_cotacao_v2.model.ofertaMaterialLista.OfertaMaterialListaResponseDto;
 import com.main.app_cotacao_v2.service.ofertaMaterialListaService.OfertaMaterialListaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,9 +34,15 @@ public class OfertaMaterialListaController {
         }
     }
 
+//    @PostMapping
+//    public OfertaMaterialLista create(@RequestBody OfertaMaterialLista lista) {
+//        return service.save(lista);
+//    }
+
     @PostMapping
-    public OfertaMaterialLista create(@RequestBody OfertaMaterialLista lista) {
-        return service.save(lista);
+    public ResponseEntity<OfertaMaterialLista> create(@RequestBody OfertaMaterialListaDto dto) {
+        OfertaMaterialLista saved = service.save(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @DeleteMapping("/{id}")

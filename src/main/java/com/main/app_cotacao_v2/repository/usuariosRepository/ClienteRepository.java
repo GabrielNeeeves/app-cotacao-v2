@@ -36,8 +36,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     void cadastrarClienteComUsuario(
             @Param("p_nome") String nome,
             @Param("p_email") String email,
-            @Param("p_senha") String senha,
-            @Param("p_aluno_id") Long alunoId
+            @Param("p_senha") String senha
+            // @Param("p_aluno_id") Long alunoId
     );
 
 }

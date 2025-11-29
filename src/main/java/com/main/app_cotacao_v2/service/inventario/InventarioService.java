@@ -26,6 +26,13 @@ public class InventarioService {
         return inventarioRepository.save(item);
     }
 
+    public void updateItem(Long id, Long usuarioId) {
+        InventarioModel item = inventarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item não encontrado"));
+
+
+    }
+
     public void deleteItem(Long id, Long usuarioId) {
         InventarioModel item = inventarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Item não encontrado"));

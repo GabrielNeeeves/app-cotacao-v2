@@ -32,6 +32,14 @@ public class InventarioController {
         return inventarioService.addItem(usuarioId, itemRequest.getItem_nome(), itemRequest.getQuantidade());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateItem(@AuthenticationPrincipal UserDetails userDetails,
+                                           @PathVariable Long id) {
+        Long usuarioId = resolveUsuarioId(userDetails);
+        inventarioService.deleteItem(id, usuarioId);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteItem(@AuthenticationPrincipal UserDetails userDetails,
                                            @PathVariable Long id) {

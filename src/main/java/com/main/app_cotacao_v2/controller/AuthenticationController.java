@@ -112,8 +112,8 @@ public class AuthenticationController {
         this.clienteRepository.cadastrarClienteComUsuario(
                 dto.nome(),
                 dto.email(),
-                encryptedPassword,
-                dto.alunoId()
+                encryptedPassword
+                // dto.alunoId()
         );
         return ResponseEntity.ok().build();
     }

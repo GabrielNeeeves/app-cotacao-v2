@@ -2,12 +2,17 @@ package com.main.app_cotacao_v2.service.ofertaMaterialListaService;
 
 import com.main.app_cotacao_v2.model.ofertaMaterial.OfertaMaterialResponseDto;
 import com.main.app_cotacao_v2.model.ofertaMaterialLista.OfertaMaterialLista;
+import com.main.app_cotacao_v2.model.ofertaMaterialLista.OfertaMaterialListaDto;
 import com.main.app_cotacao_v2.model.ofertaMaterialLista.OfertaMaterialListaResponseDto;
+import com.main.app_cotacao_v2.model.usuariosModel.Funcionario;
 import com.main.app_cotacao_v2.repository.ofertaMaterial.OfertaMaterialRepository;
 import com.main.app_cotacao_v2.repository.ofertaMaterialListaRepository.OfertaMaterialListaRepository;
+import com.main.app_cotacao_v2.repository.usuariosRepository.FuncionarioRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,9 +22,10 @@ public class OfertaMaterialListaService {
 
     @Autowired
     private OfertaMaterialRepository ofertaRepository;
-
     @Autowired
     private OfertaMaterialListaRepository listaRepository;
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
 
     public List<OfertaMaterialListaResponseDto> findAllWithDetails() {
         return listaRepository.findAll().stream().map(lista -> {
@@ -37,7 +43,7 @@ public class OfertaMaterialListaService {
                     .filter(o -> o != null)
                     .toList();
 
-            return new OfertaMaterialListaResponseDto(lista.getId(), ofertas);
+            return new OfertaMaterialListaResponseDto(lista.getId(), lista.getFuncionario_id(), ofertas);
         }).toList();
     }
 
@@ -59,10 +65,16 @@ public class OfertaMaterialListaService {
                 .filter(o -> o != null) // remove nulls caso algum ID não exista
                 .collect(Collectors.toList());
 
-        return new OfertaMaterialListaResponseDto(lista.getId(), ofertas);
+        return new OfertaMaterialListaResponseDto(lista.getId(), lista.getFuncionario_id(), ofertas);
     }
 
-    public OfertaMaterialLista save(OfertaMaterialLista lista) {
+    public OfertaMaterialLista save(OfertaMaterialListaDto dto) {
+        Funcionario funcionario = funcionarioRepository.findById(dto.funcionarioId())
+                .orElseThrow(() -> new EntityNotFoundException("Funcionário não encontrado: " + dto.funcionarioId()));
+
+        OfertaMaterialLista lista = new OfertaMaterialLista();
+        lista.setFuncionario_id(funcionario);   // seta a associação
+        lista.setOfertaIds(dto.ofertaIds() != null ? dto.ofertaIds() : new ArrayList<>());
         return listaRepository.save(lista);
     }
 

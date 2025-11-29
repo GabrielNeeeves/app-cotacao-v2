@@ -181,6 +181,7 @@ SELECT * FROM oferta_material om
 SELECT * FROM material
 SELECT * FROM oferta_material_lista
 
+
 SELECT *
 FROM oferta_material_lista_ofertas
 
@@ -189,13 +190,25 @@ CREATE TABLE oferta_material_lista (
     id SERIAL PRIMARY KEY
 );
 
+ALTER TABLE oferta_material_lista
+ADD COLUMN funcionario_id INT;
+
 -- tabela de relação (armazena a lista de IDs)
 CREATE TABLE oferta_material_lista_ofertas (
-    lista_id INT NOT NULL,
+    lista_id INT NOT NULL
     oferta_material_id INT NOT NULL,
     PRIMARY KEY (lista_id, oferta_material_id),
     FOREIGN KEY (lista_id) REFERENCES oferta_material_lista(id) ON DELETE CASCADE,
     FOREIGN KEY (oferta_material_id) REFERENCES oferta_material(id) ON DELETE CASCADE
 );
+
+ALTER TABLE oferta_material_lista_ofertas 
+ADD COLUMN funcionario_id INT,
+ADD CONSTRAINT fk_funcionario
+    FOREIGN KEY (funcionario_id) REFERENCES funcionario(id) ON DELETE CASCADE;
+
+
+ALTER TABLE material 
+ADD COLUMN FABRICANTE TEXT
 
 
